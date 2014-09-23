@@ -26,7 +26,7 @@
 
 static UnityAdsCampaignManager *sharedUnityAdsInstanceCampaignManager = nil;
 
-+ (id)sharedInstance {
++ (instancetype)sharedInstance {
 	@synchronized(self) {
 		if (sharedUnityAdsInstanceCampaignManager == nil)
       sharedUnityAdsInstanceCampaignManager = [[UnityAdsCampaignManager alloc] init];

@@ -300,7 +300,7 @@
 
 static UnityAdsMainViewController *sharedMainViewController = nil;
 
-+ (id)sharedInstance {
++ (instancetype)sharedInstance {
 	@synchronized(self) {
 		if (sharedMainViewController == nil) {
       sharedMainViewController = [[UnityAdsMainViewController alloc] initWithNibName:nil bundle:nil];

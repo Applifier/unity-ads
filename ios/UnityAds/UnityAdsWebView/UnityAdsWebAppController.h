@@ -30,5 +30,5 @@
 - (void)sendNativeEventToWebApp:(NSString *)eventType data:(NSDictionary *)data;
 - (void)initWebApp;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 @end

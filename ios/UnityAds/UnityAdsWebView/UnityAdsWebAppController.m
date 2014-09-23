@@ -33,7 +33,7 @@
 
 static UnityAdsWebAppController *sharedWebAppController = nil;
 
-+ (id)sharedInstance {
++ (instancetype)sharedInstance {
 	@synchronized(self) {
 		if (sharedWebAppController == nil) {
       sharedWebAppController = [[UnityAdsWebAppController alloc] init];

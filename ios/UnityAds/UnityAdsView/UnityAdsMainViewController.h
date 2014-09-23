@@ -31,7 +31,7 @@
 @property (nonatomic, assign) BOOL isOpen;
 
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (BOOL)openAds:(BOOL)animated inState:(UnityAdsViewStateType)requestedState withOptions:(NSDictionary *)options;
 - (BOOL)closeAds:(BOOL)forceMainThread withAnimations:(BOOL)animated withOptions:(NSDictionary *)options;

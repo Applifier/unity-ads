@@ -34,6 +34,6 @@
 - (NSArray *)getViewableCampaigns;
 - (void)cacheNextCampaignAfter:(UnityAdsCampaign *)currentCampaign;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 @end

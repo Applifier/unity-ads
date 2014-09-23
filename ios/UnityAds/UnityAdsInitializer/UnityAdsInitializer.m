@@ -107,5 +107,20 @@
 	[[UnityAdsAnalyticsUploader sharedInstance] retryFailedUploads];
 }
 
+- (void)campaignManager:(UnityAdsCampaignManager *)campaignManager updatedWithCampaigns:(NSArray *)campaigns gamerID:(NSString *)gamerID
+{
+    
+}
+
+- (void)campaignManagerCampaignDataReceived
+{
+    
+}
+
+- (void)campaignManagerCampaignDataFailed
+{
+    
+}
+
 
 @end
