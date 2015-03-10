@@ -873,7 +873,7 @@ public class UnityAds implements IUnityAdsCacheListener,
 			UnityAdsProperties.getBaseActivity().startActivity(newIntent);
 		}
 		catch (ActivityNotFoundException e) {
-			UnityAdsDeviceLog.error("Could not find activity: " + e.getStackTrace());
+			UnityAdsDeviceLog.error("Could not find UnityAdsFullscreenActivity activity: " + e.getStackTrace());
 		}
 		catch (Exception e) {
 			UnityAdsDeviceLog.error("Weird error: " + e.getStackTrace());
