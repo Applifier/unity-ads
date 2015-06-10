@@ -82,12 +82,18 @@ static UnityAdsCampaignManager *sharedUnityAdsInstanceCampaignManager = nil;
 		if ([campaignDictionary isKindOfClass:[NSDictionary class]]) {
 			UnityAdsCampaign *campaign = [[UnityAdsCampaign alloc] initWithData:campaignDictionary];
       if (campaign.isValidCampaign) {
-        if([[[UnityAdsProperties sharedInstance] appFiltering] isEqualToString:@"simple"] || [[[UnityAdsProperties sharedInstance] appFiltering] isEqualToString:@"advanced"]) {
-          if(![UnityAdsCampaignManager isInstalled:campaign.urlSchemes]) {
-            [campaigns addObject:campaign];
-          } else {
-            UALOG_DEBUG(@"Filtered installed game %@", campaign.gameID);
+        NSString* appFiltering = [[UnityAdsProperties sharedInstance] appFiltering];
+        if([appFiltering isEqualToString:@"simple"] || [appFiltering isEqualToString:@"advanced"]) {
+          if([UnityAdsCampaignManager isInstalled:campaign.urlSchemes]) {
+            if([campaign.filterMode isEqualToString:@"blacklist"]) {
+              UALOG_DEBUG(@"Blacklisted installed game %@", campaign.gameID);
+            } else if([campaign.filterMode isEqualToString:@"whitelist"]) {
+              UALOG_DEBUG(@"Whitelisted installed game %@", campaign.gameID);
+              [campaigns addObject:campaign];
+            }
             [[[UnityAdsProperties sharedInstance] installedApps] addObject:campaign.gameID];
+          } else {
+            [campaigns addObject:campaign];
           }
         } else {
           [campaigns addObject:campaign];
