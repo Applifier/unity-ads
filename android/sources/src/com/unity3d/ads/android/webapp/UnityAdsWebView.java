@@ -1,13 +1,5 @@
 package com.unity3d.ads.android.webapp;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -30,6 +22,11 @@ import com.unity3d.ads.android.UnityAdsUtils;
 import com.unity3d.ads.android.data.UnityAdsDevice;
 import com.unity3d.ads.android.properties.UnityAdsConstants;
 import com.unity3d.ads.android.properties.UnityAdsProperties;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.lang.reflect.Method;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 public class UnityAdsWebView extends WebView {
@@ -154,18 +151,10 @@ public class UnityAdsWebView extends WebView {
 					initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_ADVERTISINGTRACKINGID_KEY, advertisingIdMd5);
 					initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_RAWADVERTISINGTRACKINGID_KEY, advertisingId);
 				} else {
-					initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_DEVICEID_KEY, UnityAdsDevice.getAndroidId(true));
-
 					if (!UnityAdsConstants.UNITY_ADS_DEVICEID_UNKNOWN.equals(UnityAdsDevice.getAndroidId(false))) {
 						initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_ANDROIDID_KEY, UnityAdsDevice.getAndroidId(true));
 						initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_RAWANDROIDID_KEY, UnityAdsDevice.getAndroidId(false));
 					}
-
-					if (!UnityAdsConstants.UNITY_ADS_DEVICEID_UNKNOWN.equals(UnityAdsDevice.getAndroidSerial())) {
-						initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_SERIALID_KEY, UnityAdsDevice.getAndroidSerial());
-					}
-
-					initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_MACADDRESS_KEY, UnityAdsDevice.getMacAddress());
 				}
 
 				initData.put(UnityAdsConstants.UNITY_ADS_WEBVIEW_DATAPARAM_SDKVERSION_KEY, UnityAdsConstants.UNITY_ADS_VERSION);
@@ -192,7 +181,6 @@ public class UnityAdsWebView extends WebView {
 			UnityAdsUtils.runOnUiThread(new UnityAdsJavascriptRunner(initString, this));
 		}
 	}
-
 
 	/* INTERNAL METHODS */
 
