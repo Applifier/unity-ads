@@ -118,6 +118,9 @@ public class UnityAdsCacheManager implements IUnityAdsCampaignHandlerListener {
 	}
 
 	public boolean isCampaignCached(UnityAdsCampaign campaign, boolean requireCompleteVideo) {
+		if (campaign == null) {
+			return false;
+		}
 		if(UnityAdsUtils.isFileInCache(campaign.getVideoFilename())) {
 			if(!requireCompleteVideo) {
 				return true;
