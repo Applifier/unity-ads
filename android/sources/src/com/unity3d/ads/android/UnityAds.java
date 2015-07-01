@@ -1013,7 +1013,9 @@ public class UnityAds implements IUnityAdsCacheListener,
 			mainview = null;
 		}
 
-		mainview = new UnityAdsMainView(UnityAdsProperties.getCurrentActivity(), _instance, _instance);
+		if (UnityAdsProperties.getCurrentActivity() != null) {
+			mainview = new UnityAdsMainView(UnityAdsProperties.getCurrentActivity(), _instance, _instance);
+		}
 	}
 
 	private static void playVideo () {
