@@ -322,14 +322,6 @@ static NSString* cellularConnectionString = @"cellular";
 static NSString* noneConnectionString = @"none";
 static NSString* currentConnectionString = @"none";
 
-+ (NSCondition*)reachabilityCondition {
-  static NSCondition* reachabilityCondition = nil;
-  if(reachabilityCondition == nil) {
-    reachabilityCondition = [NSCondition new];
-  }
-  return reachabilityCondition;
-}
-
 + (void)launchReachabilityCheck {
   __block SCNetworkReachabilityRef reachabilityRef = NULL;
   
@@ -367,10 +359,9 @@ static NSString* currentConnectionString = @"none";
       connectionString = noneConnectionString;
     }
     
-    [[self reachabilityCondition] lock];
+    @synchronized(currentConnectionString) {
     currentConnectionString = connectionString;
-    [[self reachabilityCondition] signal];
-    [[self reachabilityCondition] unlock];
+    }
     
     if(reachabilityRef != NULL) {
       SCNetworkReachabilitySetCallback(reachabilityRef, NULL, NULL);
