@@ -322,6 +322,11 @@ static NSString* cellularConnectionString = @"cellular";
 static NSString* noneConnectionString = @"none";
 static NSString* currentConnectionString = @"none";
 
+//removed NScondition implementation, replace with on-demand @synchronized call
+// This will return currentConnectionString = none the first call,
+//but analytics doesn't want this info until a video plays, so
+// so the first value should not matter anyway
+
 + (void)launchReachabilityCheck {
   __block SCNetworkReachabilityRef reachabilityRef = NULL;
   

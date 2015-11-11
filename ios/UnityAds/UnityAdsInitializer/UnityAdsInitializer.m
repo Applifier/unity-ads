@@ -88,6 +88,7 @@
 
 - (void)waitForReachabilityCheck {
   [UnityAdsDevice launchReachabilityCheck];
+  //removed NSCondition call - See UnityAdsDevice changes for details
 }
 
 - (void)initCampaignManager {
