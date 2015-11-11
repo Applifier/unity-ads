@@ -128,7 +128,11 @@
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+  if(_fileHandle != nil){
   [_fileHandle writeData:data];
+  }else{
+    NSLog(@"_fileHandle returned nil in NSURLConnectionDataDelegate callback");
+  }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
