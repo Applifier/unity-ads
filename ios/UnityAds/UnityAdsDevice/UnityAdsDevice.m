@@ -322,13 +322,10 @@ static NSString* cellularConnectionString = @"cellular";
 static NSString* noneConnectionString = @"none";
 static NSString* currentConnectionString = @"none";
 
-+ (NSCondition*)reachabilityCondition {
-  static NSCondition* reachabilityCondition = nil;
-  if(reachabilityCondition == nil) {
-    reachabilityCondition = [NSCondition new];
-  }
-  return reachabilityCondition;
-}
+//removed NScondition implementation, replace with on-demand @synchronized call
+// This will return currentConnectionString = none the first call,
+//but analytics doesn't want this info until a video plays, so
+// so the first value should not matter anyway
 
 + (void)launchReachabilityCheck {
   __block SCNetworkReachabilityRef reachabilityRef = NULL;
@@ -367,10 +364,9 @@ static NSString* currentConnectionString = @"none";
       connectionString = noneConnectionString;
     }
     
-    [[self reachabilityCondition] lock];
+    @synchronized(currentConnectionString) {
     currentConnectionString = connectionString;
-    [[self reachabilityCondition] signal];
-    [[self reachabilityCondition] unlock];
+    }
     
     if(reachabilityRef != NULL) {
       SCNetworkReachabilitySetCallback(reachabilityRef, NULL, NULL);
