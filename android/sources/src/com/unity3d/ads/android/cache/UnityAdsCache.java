@@ -127,6 +127,11 @@ public class UnityAdsCache {
 			fileList = _cacheDirectory.listFiles(filter);
 		}
 
+		if(fileList == null) {
+			UnityAdsDeviceLog.error("Unity Ads cache: Could not obtain fileList from cache");
+			return;
+		}
+
 		for(File cacheFile : fileList) {
 			String name = cacheFile.getName();
 
